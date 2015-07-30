@@ -8,4 +8,4 @@ addons:
   code_climate:
     repo_token: 1f00cf728cc611700e28d44e1fabb306223f13f230994532cd01834f8874bde8
 after_script:
-  - codeclimate-test-reporter < lcov.info
+  - codeclimate-test-reporter < "coverage/PhantomJS 1.9.8 (Windows 8 0.0.0)/lcov.info"
