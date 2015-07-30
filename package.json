@@ -26,7 +26,7 @@
     "npm": ">=1.4.3"
   },
   "scripts": {
-    "test": "'karma start --single-run --browsers PhantomJS'"
+    "test": "karma start --single-run --browsers PhantomJS"
   },
   "dependencies": {
     "gulp": "^3.9.0",
