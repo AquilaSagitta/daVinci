@@ -1,7 +1,6 @@
-/**
- * Created by Jenkins on 7/29/2015.
- */
-describe('environment',function() {
+describe('daVinci', function() {
+    'use strict';
+
     it('should work', function() {
         expect('everything').to.be.ok;
     });
