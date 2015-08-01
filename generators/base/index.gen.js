@@ -29,6 +29,8 @@ module.exports = function(gulp, install, conflict, template, rename, _, inquirer
             user = require('iniparser').parseSync(configFile).user;
         }
 
+        user = user || {};
+
         return {
             appName: workingDirName,
             userName: osUserName || format(user.name || ''),
