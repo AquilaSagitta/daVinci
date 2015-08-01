@@ -7,9 +7,20 @@
 Experimental project structure focusing on simplicity by utilizing node.js and feature driven development.
 
 
+<!-- Start gulpfile.js -->
+
+## docs()
+
+Author: Chris Blahut
+
+<!-- End gulpfile.js -->
+
+
+
+
 <!-- Start generators\base\index.js -->
 
-## exports()
+## test()
 
 <!-- End generators\base\index.js -->
 

@@ -2,6 +2,11 @@ node_modules
 temp
 *.log
 .idea
+components
+.*
+PREFACE.md
+CONTRIBUTING.md
+*.spec.js
 
 
 # don't ignore .npmignore files

@@ -15,19 +15,6 @@ var gulp = require('gulp'),
     rename = require('gulp-rename'),
     _ = require('underscore.string'),
     inquirer = require('inquirer'),
-    path = require('path'),
-    markdox = require('gulp-markdox'),
-    concat = require('gulp-concat'),
-    es = require('event-stream');
+    path = require('path');
 
-gulp = require('./generators/base/index.js')(gulp, install, conflict, template, rename, _, inquirer, path);
-
-
-gulp.task('docs', function() {
-    es.merge(gulp.src('PREFACE.md'),
-        gulp.src(['./generators/**/*.js', '!./generators/**/*.spec.js'])
-            .pipe(markdox())
-            .pipe(concat('DOCUMENTATION.md')))
-        .pipe(concat('README.md'))
-        .pipe(gulp.dest('./'));
-});
+gulp = require('./generators/base/index.gen.js')(gulp, install, conflict, template, rename, _, inquirer, path);

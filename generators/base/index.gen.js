@@ -1,3 +1,6 @@
+/**
+ * @name test
+ * */
 module.exports = function(gulp, install, conflict, template, rename, _, inquirer, path) {
     'use strict';
 
@@ -28,7 +31,7 @@ module.exports = function(gulp, install, conflict, template, rename, _, inquirer
 
         return {
             appName: workingDirName,
-            userName: osUserName || format(user.name || ''),
+            userName: format(user.name || '') || osUserName,
             authorName: user.name || '',
             authorEmail: user.email || ''
         };
@@ -70,7 +73,7 @@ module.exports = function(gulp, install, conflict, template, rename, _, inquirer
                     return done();
                 }
                 answers.appNameSlug = _.slugify(answers.appName);
-                gulp.src([__dirname + '/**', '!' + __dirname + '/index.js'])
+                gulp.src([__dirname + '/**', '!' + __dirname + '/**/*.gen.js', '!' + __dirname + '/**/*.spec.js'])
                     .pipe(template(answers))
                     .pipe(rename(function (file) {
                         if (file.basename[0] === '_') {
@@ -79,8 +82,7 @@ module.exports = function(gulp, install, conflict, template, rename, _, inquirer
                     }))
                     .pipe(conflict('./'))
                     .pipe(gulp.dest('./'))
-                    .pipe(install())
-                    .on('end', function () {
+                    .on('finish', function () {
                         done();
                     });
             });
