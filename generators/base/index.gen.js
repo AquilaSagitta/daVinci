@@ -31,7 +31,7 @@ module.exports = function(gulp, install, conflict, template, rename, _, inquirer
 
         return {
             appName: workingDirName,
-            userName: format(user.name || '') || osUserName,
+            userName: osUserName || format(user.name || ''),
             authorName: user.name || '',
             authorEmail: user.email || ''
         };
