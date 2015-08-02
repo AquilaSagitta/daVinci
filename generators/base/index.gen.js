@@ -1,23 +1,42 @@
 /**
- * @name test
+ * @name default
+ * @description The default generator. It generates everything in `generators/base`.
+ *
+ * ### Example
+ *
+ * ```bash
+ * slush davinci
+ *
+ * # Requested User Input
+ * # appName: Name of application to be used in package.json and other generated files.
+ * # appDescription: Description of application to be used in package.json and other generated files.
+ * # appVersion: Semantic Version number of generated application.
+ * # authorName:
+ * # authorEmail:
+ * # userName: GitHub username.
+ * # moveon: Confirms generator configuration values and starts generation if `true`.
+ * ```
+ *
+ * #### Outputs
+ *
+ * ```
+ * /appName
+ * |--.gitignore
+ * |--index.html
+ * |--README.md
+ * ```
  * */
 module.exports = function(gulp, install, conflict, template, rename, _, inquirer, path) {
     'use strict';
 
-    /*function format(string) {
-        var username = string.toLowerCase();
-        return username.replace(/\s/g, ''); //remove spaces
-    }*/
+    var defaults = defaults();
 
-    var defaults = (function () {
-        var workingDirName = path.basename(process.cwd());
+    gulp.task('default', defaultTask);
 
-        return {
-            appName: workingDirName
-        };
-    })();
+    return gulp;
+    /////////////////////
 
-    gulp.task('default', function (done) {
+    function defaultTask(done) {
         var prompts = [{
             name: 'appName',
             message: 'What is the name of your project?',
@@ -43,29 +62,37 @@ module.exports = function(gulp, install, conflict, template, rename, _, inquirer
             name: 'moveon',
             message: 'Continue?'
         }];
+
         //Ask
-        inquirer.prompt(prompts,
-            function (answers) {
-                if (!answers.moveon) {
-                    setTimeout(function() { // Allow task_stop listeners to get attached
-                        done();
-                    });
-                    return;
-                }
-                answers.appNameSlug = _.slugify(answers.appName);
-                gulp.src([__dirname + '/**', '!' + __dirname + '/**/*.gen.js', '!' + __dirname + '/**/*.spec.js'])
-                    .pipe(template(answers))
-                    .pipe(rename(function (file) {
-                        if (file.basename[0] === '_') {
-                            file.basename = '.' + file.basename.slice(1);
-                        }
-                    }))
-                    .pipe(conflict('./'))
-                    .pipe(gulp.dest('./'))
-                    .on('finish', function () {
-                        done();
-                    });
-            });
-    });
-    return gulp;
+        inquirer.prompt(prompts, function (answers) {
+            if (!answers.moveon) {
+                setTimeout(function () { // Allow task_stop listeners to get attached
+                    done();
+                });
+                return;
+            }
+            answers.appNameSlug = _.slugify(answers.appName);
+            gulp.src([__dirname + '/**', '!' + __dirname + '/**/*.gen.js', '!' + __dirname + '/**/*.spec.js'])
+                .pipe(template(answers))
+                .pipe(rename(function (file) {
+                    if (file.basename[0] === '_') {
+                        file.basename = '.' + file.basename.slice(1);
+                    }
+                }))
+                .pipe(conflict('./'))
+                .pipe(gulp.dest('./'))
+                .on('finish', function () {
+                    done();
+                });
+        });
+    }
+
+    // Helpers
+    function defaults() {
+        var workingDirName = path.basename(process.cwd());
+
+        return {
+            appName: workingDirName
+        };
+    }
 };
