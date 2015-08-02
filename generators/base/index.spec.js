@@ -23,7 +23,7 @@ describe('Generator Base', function() {
             if(!er && s.isDirectory()) {
                 process.chdir('temp');
             } else {
-                process.mkdir('temp');
+                fs.mkdir('temp');
                 process.chdir('temp');
             }
         });
