@@ -68,7 +68,7 @@ Things you need to know if contributing.
 It is not necessary to have `gulp` installed globally. Use
 
 ```bash
-npm run task -- [taskname]
+npm run task -- [taskname] #space is necessary between -- and [taskname]
 ```
 
 Otherwise use gulp as normal.
@@ -79,8 +79,8 @@ gulp [taskname]
 
 ## docs()
 
-Generate documentation. This task searches all js files for inline documentation and generates markdown. It then concatenates the markdown with `PREFACE.md` and finally writes that to
-`README.md`.
+Generate documentation. This task searches all js files for inline documentation and generates markdown. It then concatenates the markdown to the end of `PREFACE.md` and finally
+writes that to `README.md`.
 
 ### Example
 
@@ -99,6 +99,8 @@ Starts tests. [Mocha](http://mochajs.org/) is the testing framework used with [C
 
 ```bash
 npm test
+# which is just an alias for
+npm run task -- test
 # or if you have gulp installed globally
 gulp test
 ```
