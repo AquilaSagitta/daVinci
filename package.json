@@ -26,8 +26,7 @@
     "npm": ">=1.4.3"
   },
   "scripts": {
-    "pretest": "npm install",
-    "test": "node_modules/.bin/gulp test",
+    "test": "npm run task -- test",
     "pretask": "npm install",
     "task": "node_modules/.bin/gulp"
   },
