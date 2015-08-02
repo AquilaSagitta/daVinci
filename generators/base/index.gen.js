@@ -4,38 +4,16 @@
 module.exports = function(gulp, install, conflict, template, rename, _, inquirer, path) {
     'use strict';
 
-    function format(string) {
+    /*function format(string) {
         var username = string.toLowerCase();
-        return username.replace(/\s/g, '');
-    }
+        return username.replace(/\s/g, ''); //remove spaces
+    }*/
 
     var defaults = (function () {
-        var workingDirName = path.basename(process.cwd()),
-            homeDir, osUserName, configFile, user;
-
-        if (process.platform === 'win32') {
-            homeDir = process.env.USERPROFILE;
-            osUserName = process.env.USERNAME || path.basename(homeDir).toLowerCase();
-        }
-        else {
-            homeDir = process.env.HOME || process.env.HOMEPATH;
-            osUserName = homeDir && homeDir.split('/').pop() || 'root';
-        }
-
-        configFile = path.join(homeDir, '.gitconfig');
-        user = {};
-
-        if (require('fs').existsSync(configFile)) {
-            user = require('iniparser').parseSync(configFile).user;
-        }
-
-        user = user || {};
+        var workingDirName = path.basename(process.cwd());
 
         return {
-            appName: workingDirName,
-            userName: osUserName || format(user.name || ''),
-            authorName: user.name || '',
-            authorEmail: user.email || ''
+            appName: workingDirName
         };
     })();
 
@@ -53,16 +31,13 @@ module.exports = function(gulp, install, conflict, template, rename, _, inquirer
             default: '0.1.0'
         }, {
             name: 'authorName',
-            message: 'What is the author name?',
-            default: defaults.authorName
+            message: 'What is the author name?'
         }, {
             name: 'authorEmail',
-            message: 'What is the author email?',
-            default: defaults.authorEmail
+            message: 'What is the author email?'
         }, {
             name: 'userName',
-            message: 'What is the github username?',
-            default: defaults.userName
+            message: 'What is the github username?'
         }, {
             type: 'confirm',
             name: 'moveon',
@@ -72,7 +47,10 @@ module.exports = function(gulp, install, conflict, template, rename, _, inquirer
         inquirer.prompt(prompts,
             function (answers) {
                 if (!answers.moveon) {
-                    return done();
+                    setTimeout(function() { // Allow task_stop listeners to get attached
+                        done();
+                    });
+                    return;
                 }
                 answers.appNameSlug = _.slugify(answers.appName);
                 gulp.src([__dirname + '/**', '!' + __dirname + '/**/*.gen.js', '!' + __dirname + '/**/*.spec.js'])

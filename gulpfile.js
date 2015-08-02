@@ -21,7 +21,7 @@ function docs() {
 }
 
 function test(cb) {
-    gulp.src(['slushfile.js', 'generators/**/*.js'])
+    gulp.src(['slushfile.js', 'generators/**/*.js', '!generators/**/*.spec.js'])
         .pipe(istanbul()) // Covering files
         .pipe(istanbul.hookRequire()) // Force `require` to return covered files
         .on('finish', function () {

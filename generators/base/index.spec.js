@@ -32,12 +32,16 @@ describe('Generator Base', function() {
     beforeEach(function() {
         mockPrompt({
             appName: 'test-app',
-            userName: 'the-simian',
+            userName: 'test user',
             authorName: 'Fancypants Harlin',
             authorEmail: 'derp@derp.derp',
             appDescription: 'some description',
             moveon: true
         });
+    });
+
+    afterEach(function() {
+        mockGulpDest = require('mock-gulp-dest')(gulp); // Reset mockGulpDest asserts
     });
 
     filesToExist.forEach(function(file) {
@@ -50,22 +54,17 @@ describe('Generator Base', function() {
             assertUnGeneratedFile(file, done);
         });
     });
-    /*it('should exit if moveon is false', function(done) {
+    it('should exit if moveon is false', function(done) {
         mockPrompt({
-            appName: 'test-app',
-            userName: 'the-simian',
-            authorName: 'Fancypants Harlin',
-            authorEmail: 'derp@derp.derp',
-            appDescription: 'some description',
             moveon: false
         });
         gulp
             .start('default')
-            .once('finished', function() {
+            .once('task_stop', function() {
                 mockGulpDest.assertDestNotContains(filesToExist);
                 done();
             });
-    });*/
+    });
     /////////////////////
 
     function assertGeneratedFile(file, cb) {
