@@ -29,7 +29,7 @@
 module.exports = function(gulp, install, conflict, template, rename, _, inquirer, path) {
     'use strict';
 
-    var defaults = defaults();
+    var defaultValue = defaults();
 
     gulp.task('default', defaultTask);
 
@@ -40,7 +40,7 @@ module.exports = function(gulp, install, conflict, template, rename, _, inquirer
         var prompts = [{
             name: 'appName',
             message: 'What is the name of your project?',
-            default: defaults.appName
+            default: defaultValue.appName
         }, {
             name: 'appDescription',
             message: 'What is the description?'
