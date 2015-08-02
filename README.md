@@ -59,11 +59,8 @@ slush davinci
 
 <!-- Start gulpfile.js -->
 
+## 
 # Developing This Generator
-
-Things you need to know if contributing.
-
-## gulp
 
 It is not necessary to have `gulp` installed globally. Use
 

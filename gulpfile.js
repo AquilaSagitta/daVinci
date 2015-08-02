@@ -1,10 +1,8 @@
 /**
+ * @name
+ *
  * # Developing This Generator
  *
- * Things you need to know if contributing.
- * */
-
-/**
  * It is not necessary to have `gulp` installed globally. Use
  *
  * ```bash
