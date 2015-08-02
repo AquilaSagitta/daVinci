@@ -3,7 +3,8 @@ var chai = require('chai'),
     gulp = require('gulp'),
     mockGulpDest = require('mock-gulp-dest')(gulp),
     expect = chai.expect,
-    mockPrompt = require('../../components/mockPrompt');
+    mockPrompt = require('../../components/mockPrompt'),
+    fs = require('fs');
 
 require('../../slushfile');
 
@@ -18,7 +19,14 @@ describe('Generator Base', function() {
         ];
 
     before(function() {
-        process.chdir('temp');
+        fs.stat('temp', function (er, s) {
+            if(!er && s.isDirectory()) {
+                process.chdir('temp');
+            } else {
+                process.mkdir('temp');
+                process.chdir('temp');
+            }
+        });
     });
 
     beforeEach(function() {
