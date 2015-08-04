@@ -17,4 +17,4 @@ var gulp = require('gulp'),
     inquirer = require('inquirer'),
     path = require('path');
 
-gulp = require('./generators/base/index.gen.js')(gulp, install, conflict, template, rename, _, inquirer, path);
+gulp = require('./generators/base/base.js')(gulp, install, conflict, template, rename, _, inquirer, path);

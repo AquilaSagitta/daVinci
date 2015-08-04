@@ -10,7 +10,7 @@ require('../../slushfile');
 
 describe('Generator Base', function() {
     var filesToExist = [
-        'index.html',
+        'app/index.html',
         'README.md'
         ],
         filesToNotExist = [

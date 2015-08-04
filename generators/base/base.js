@@ -72,7 +72,7 @@ module.exports = function(gulp, install, conflict, template, rename, _, inquirer
                 return;
             }
             answers.appNameSlug = _.slugify(answers.appName);
-            gulp.src([__dirname + '/**', '!' + __dirname + '/**/*.gen.js', '!' + __dirname + '/**/*.spec.js'])
+            gulp.src([__dirname + '/template/**'])
                 .pipe(template(answers))
                 .pipe(rename(function (file) {
                     if (file.basename[0] === '_') {
