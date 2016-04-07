@@ -14,7 +14,7 @@
   "bugs": {
     "url": "https://github.com/AquilaSagitta/slush-davinci/issues"
   },
-  "license": { "type": "MIT" },
+  "license": "MIT",
   "main": "slushfile.js",
   "engines": {
     "node": ">= 0.10.26",
