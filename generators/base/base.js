@@ -1,6 +1,6 @@
 /**
  * @name default
- * @description The default generator. It generates everything in `generators/base`.
+ * @description The default generator. It generates everything in `generators/base/template`.
  *
  * ### Example
  *
@@ -43,17 +43,17 @@ module.exports = function(gulp, install, conflict, template, rename, _, inquirer
             default: defaultValue.appName
         }, {
             name: 'appDescription',
-            message: 'What is the description?'
+            message: 'What is the project\'s description?'
         }, {
             name: 'appVersion',
             message: 'What is the version of your project?',
             default: '0.1.0'
         }, {
             name: 'authorName',
-            message: 'What is the author name?'
+            message: 'What is the author\'s name?'
         }, {
             name: 'authorEmail',
-            message: 'What is the author email?'
+            message: 'What is the author\'s email?'
         }, {
             name: 'userName',
             message: 'What is the github username?'
